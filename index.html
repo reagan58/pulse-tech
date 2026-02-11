@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PulseTech — Youth Technology News</title>
+    <meta name="description" content="PulseTech is a youth-focused technology news platform covering AI, gaming, startups, campus innovation, and creator culture." />
+  <meta name="keywords" content="technology news, youth tech, AI news, gaming news, student startups, PulseTech" />
+  <meta name="author" content="PulseTech" />
+  <meta property="og:title" content="PulseTech — Youth Technology News" />
+  <meta property="og:description" content="Fast, visual tech news for youth: AI, gaming, startups, and creator culture." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pulsetech.com" /><style>
+    :root {
+      --ink: #050b1a;
+      --ink-2: #081533;
+      --paper: #eef6ff;
+      --accent: #0b3d91;
+      --accent-2: #0b6bc6;
+      --accent-3: #2f90ff;
+      --muted: #4a5f7a;
+      --card: #ffffff;
+      --shadow: 0 16px 40px rgba(5, 11, 26, 0.14);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", "Sora", "DM Sans", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(1000px 700px at 5% -10%, rgba(11, 61, 145, 0.45) 0%, transparent 60%),
+                  radial-gradient(900px 700px at 100% 0%, rgba(47, 144, 255, 0.35) 0%, transparent 60%),
+                  radial-gradient(800px 600px at 50% 120%, rgba(11, 107, 198, 0.35) 0%, transparent 55%),
+                  var(--paper);
+      line-height: 1.5;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      background: rgba(247, 244, 239, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      font-size: 22px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .brand-badge {
+      background: var(--accent);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .nav {
+      display: flex;
+      gap: 18px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--ink-2);
+    }
+    .cta {
+      background: var(--ink);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-card {
+      background: var(--card);
+      padding: 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card:after {
+      content: "";
+      position: absolute;
+      inset: -50% -20% auto auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, #ffe9df 0%, transparent 65%);
+      z-index: 0;
+    }
+    .hero h1 {
+      font-size: 44px;
+      line-height: 1.05;
+      margin: 0 0 12px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-alt {
+      background: #fff;
+      border: 2px solid var(--ink);
+      color: var(--ink);
+    }
+
+    .tag-strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .tag {
+      background: #f0efe9;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 16px;
+    }
+    .side-card {
+      background: var(--ink);
+      color: white;
+      border-radius: var(--radius);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .side-card h3 { margin: 0 0 6px 0; }
+    .side-card p { margin: 0; color: #c8c9d4; }
+    .side-card .badge {
+      display: inline-block;
+      background: var(--accent-2);
+      color: var(--ink);
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 40px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 24px;
+      margin: 0;
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .card h4 { margin: 8px 0; }
+.card-thumb {
+      width: 100%;
+      height: 140px;
+      border-radius: 14px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .feature-img.ai-mentor {
+      background-image: linear-gradient(135deg, rgba(11, 61, 145, 0.6), rgba(0, 163, 255, 0.4)), url("https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800&q=80");
+      background-size: cover;
+      background-position: center;
+    }
+    .feature-img.waste-app {
+      background-image: linear-gradient(135deg, rgba(11, 107, 198, 0.5), rgba(0, 212, 255, 0.35)), url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .meta { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .pill {
+      background: var(--accent-3);
+      color: var(--ink);
+      padding: 4px 8px;
+      font-size: 11px;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .feature-img {
+      background: linear-gradient(135deg, #ff6a3d, #00c2b2);
+      border-radius: var(--radius);
+      height: 180px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .newsletter {
+      background: var(--ink);
+      color: white;
+      border-radius: var(--radius);
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .newsletter input {
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      width: 240px;
+    }
+    .newsletter button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .footer {
+      padding: 40px;
+      background: #101120;
+      color: #c8c9d4;
+      margin-top: 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Videos */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .video-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 12px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 8px;
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 180px;
+      border: 0;
+      border-radius: 12px;
+    }
+
+    /* Live wire */
+    .live-wire {
+      display: grid;
+      gap: 12px;
+    }
+    .wire-item {
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .wire-item a {
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .wire-source { color: var(--muted); font-size: 12px; }
+
+    /* Creator toolkit */
+    .toolkit {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .tool {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .tool h4 { margin: 8px 0; }
+
+    /* Events */
+    .event {
+      display: grid;
+      gap: 6px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    /* Skills spotlight */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 12, 24, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      width: min(560px, 92vw);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .modal h3 { margin: 0 0 6px 0; }
+    .modal p { margin: 0 0 14px 0; color: var(--muted); }
+    .modal .close {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      background: #f0efe9;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .modal form {
+      display: grid;
+      gap: 10px;
+    }
+    .modal input, .modal textarea, .modal select {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #e6e3da;
+      font-family: inherit;
+    }
+
+    /* Animations */
+    .fade-in {
+      animation: fadeIn 0.8s ease both;
+    }
+    .stagger > * {
+      animation: fadeInUp 0.8s ease both;
+    }
+    .stagger > *:nth-child(2) { animation-delay: 0.1s; }
+    .stagger > *:nth-child(3) { animation-delay: 0.2s; }
+    .stagger > *:nth-child(4) { animation-delay: 0.3s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid-3, .grid-4, .grid-2, .two-col, .toolkit, .skills-grid, .video-grid { grid-template-columns: 1fr; }
+      .newsletter { grid-template-columns: 1fr; }
+      .topbar { flex-wrap: wrap; gap: 12px; }
+      .feature { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-badge">PT</span> PulseTech
+      <span class="meta">pulsetech.com</span>
+    </div>
+    <nav class="nav">
+      <a href="#trending">Trending</a>
+      <a href="#live">Live Wire</a>\n      <a href="#videos">AI Videos</a>
+      <a href="#campus">Campus</a>
+      <a href="#culture">Culture</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#guides">Guides</a>
+    </nav>
+    <button class="cta" data-modal="join">Join the Drop</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card fade-in">
+      <div class="pill">Breaking</div>
+      <h1>PulseTech – The Tech News Feed Built for Youth Culture</h1>
+      <p>Fast, visual, and real. From AI to gaming, startups to street tech — PulseTech puts young creators in the spotlight.</p>
+      <div class="hero-actions">
+        <button class="btn" data-modal="read">Read Now</button>
+        <button class="btn btn-alt" data-modal="community">Join Community</button>
+      </div>
+      <div class="tag-strip">
+        <span class="tag">AI</span>
+        <span class="tag">Gaming</span>
+        <span class="tag">Startups</span>
+        <span class="tag">Wearables</span>
+        <span class="tag">Social</span>
+      </div>
+    </div>
+
+    <div class="side-stack fade-in">
+      <div class="side-card">
+        <div class="badge">Live</div>
+        <h3>Launch Radar</h3>
+        <p>Today’s newest apps, gadgets, and drops.</p>
+        <button class="btn" data-modal="launch">Submit a Launch</button>
+      </div>
+      <div class="side-card" style="background:#0b3d4f;">
+        <div class="badge" style="background:#ffcc00;">Hot</div>
+        <h3>Campus Builders</h3>
+        <p>Student founders and their latest startups.</p>
+        <button class="btn" data-modal="builder">Get Featured</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="trending" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Trending Stories</h2>
+      <span class="meta">Updated hourly</span>
+    </div>
+    <div class="grid grid-3 stagger">
+      <article class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Laptop with code" />
+        <div class="pill">AI</div>
+        <h4>Street-smart chatbots are replacing search for Gen Z.</h4>
+        <div class="meta">2 min read · Today</div>
+      </article>
+      <article class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Gaming controller" />
+        <div class="pill">Gaming</div>
+        <h4>Mobile esports leagues are moving into high schools.</h4>
+        <div class="meta">4 min read · Today</div>
+      </article>
+      <article class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?auto=format&fit=crop&w=800&q=80" alt="Creators collaborating" />
+        <div class="pill">Creators</div>
+        <h4>Three teen founders raising for climate tech apps.</h4>
+        <div class="meta">3 min read · Today</div>
+      </article>
+    </div>
+  </section>
+
+  <section id="live" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Live Tech Wire</h2>
+      <span class="meta">Pulled from multiple sources in real time</span>
+    </div>
+    <div class="live-wire" id="live-wire">
+      <div class="wire-item">
+        <div class="pill">Loading</div>
+        <a href="#">Fetching live stories…</a>
+        <span class="wire-source">Please wait</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="campus" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Campus & Youth Startups</h2>
+      <span class="meta">Made by students</span>
+    </div>
+    <div class="grid grid-2">
+      <div class="card feature">
+        <div class="feature-img ai-mentor"></div>
+        <div>
+          <h4>Study-buddy AI that matches you with real-time mentors.</h4>
+          <div class="meta">Startup spotlight</div>
+        </div>
+      </div>
+      <div class="card feature">
+        <div class="feature-img waste-app"></div>
+        <div>
+          <h4>Waste-tracking app built by a 17-year-old designer.</h4>
+          <div class="meta">Campus innovation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="culture" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Tech Culture</h2>
+      <span class="meta">Music, art, and internet life</span>
+    </div>
+    <div class="grid grid-4">
+      <div class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1511376777868-611b54f68947?auto=format&fit=crop&w=800&q=80" alt="Music studio" />
+        <h4>AI in music: remixing the future.</h4>
+      </div>
+      <div class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80" alt="Streetwear fashion" />
+        <h4>Streetwear meets smart fabric.</h4>
+      </div>
+      <div class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?auto=format&fit=crop&w=800&q=80" alt="Creators at work" />
+        <h4>Creators building in public on socials.</h4>
+      </div>
+      <div class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Digital art" />
+        <h4>Digital art that moves with you.</h4>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Reviews & Unbox</h2>
+      <span class="meta">Honest takes, fast</span>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" alt="Smartphone" />
+        <h4>Budget phone that actually slaps.</h4>
+        <div class="meta">8/10 · 5 min</div>
+      </div>
+      <div class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1518441902112-f47e3a0e2a2a?auto=format&fit=crop&w=800&q=80" alt="Earbuds" />
+        <h4>Earbuds made for study sessions.</h4>
+        <div class="meta">9/10 · 4 min</div>
+      </div>
+      <div class="card">
+        <img class="card-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Gaming controller" />
+        <h4>Handheld console for commuters.</h4>
+        <div class="meta">7/10 · 6 min</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guides" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Guides & How-To</h2>
+      <span class="meta">Learn fast</span>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <h4>Build your first app in a weekend.</h4>
+        <p class="meta">Starter kit for beginners.</p>
+      </div>
+      <div class="card">
+        <h4>Best free tools for student creators.</h4>
+        <p class="meta">Design, video, and code.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolkit" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Creator Toolkit</h2>
+      <span class="meta">Your stack, curated</span>
+    </div>
+    <div class="toolkit">
+      <div class="tool">
+        <div class="pill">Design</div>
+        <h4>Pixel-perfect mockups</h4>
+        <p class="meta">Templates, UI kits, and brand builders.</p>
+      </div>
+      <div class="tool">
+        <div class="pill">Video</div>
+        <h4>Short-form edits fast</h4>
+        <p class="meta">Caption tools and sound packs.</p>
+      </div>
+      <div class="tool">
+        <div class="pill">Code</div>
+        <h4>Launch-ready starter kits</h4>
+        <p class="meta">APIs, components, and boilerplates.</p>
+      </div>
+      <div class="tool">
+        <div class="pill">AI</div>
+        <h4>Creator copilots</h4>
+        <p class="meta">Prompts, workflows, and automations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Events & Challenges</h2>
+      <span class="meta">Join the next drop</span>
+    </div>
+    <div class="grid grid-3">
+      <div class="event">
+        <h4>48-hour Build Sprint</h4>
+        <p class="meta">Teams of 2–4. Ship a prototype by Sunday.</p>
+        <button class="btn" data-modal="event">Join Sprint</button>
+      </div>
+      <div class="event">
+        <h4>Creator Challenge: AI Remix</h4>
+        <p class="meta">Submit an AI-powered remix by Friday.</p>
+        <button class="btn" data-modal="event">Submit Remix</button>
+      </div>
+      <div class="event">
+        <h4>Campus Demo Night</h4>
+        <p class="meta">Showcase your startup to mentors.</p>
+        <button class="btn" data-modal="event">Apply to Demo</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Skills Spotlight</h2>
+      <span class="meta">Learn the tools shaping 2026</span>
+    </div>
+    <div class="skills-grid">
+      <div class="card">
+        <div class="pill">AI</div>
+        <h4>Prompt engineering for creators</h4>
+        <p class="meta">Build agents, workflows, and automations.</p>
+      </div>
+      <div class="card">
+        <div class="pill">Hardware</div>
+        <h4>Micro-builds with low-cost kits</h4>
+        <p class="meta">Sensors, wearables, and IoT.</p>
+      </div>
+      <div class="card">
+        <div class="pill">Media</div>
+        <h4>Interactive storytelling</h4>
+        <p class="meta">Narrative design for web and mobile.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Community Spotlight</h2>
+      <span class="meta">Youth voices</span>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h4>Monthly Creator Challenge</h4>
+        <p class="meta">Show your build, win gear.</p>
+      </div>
+      <div class="card">
+        <h4>Student Journalism Crew</h4>
+        <p class="meta">Write stories, get featured.</p>
+      </div>
+      <div class="card">
+        <h4>Mentor Sessions</h4>
+        <p class="meta">Live Q&A with tech leaders.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="newsletter" class="section">
+    <div class="newsletter">
+      <div>
+        <h3>Get the weekly drop</h3>
+        <p class="meta">Fresh tech news made for youth.</p>
+      </div>
+      <div>
+        <input type="email" placeholder="Email address" />
+        <button data-modal="subscribe">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3>PulseTech</h3>
+        <p>Tech news built with youth culture at the center.</p>
+        <p class="meta">pulsetech.com</p>
+      </div>
+      <div>
+        <p>About</p>
+        <p>Contact</p>
+        <p>Advertise</p>
+      </div>
+      <div>
+        <p>Privacy</p>
+        <p>Terms</p>
+        <p>Careers</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+  <div class="modal-backdrop" data-backdrop>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="close" data-close>Close</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const modalContent = {
+      join: {
+        title: "Join the Drop",
+        body: "Get weekly tech news, creator tips, and early access to events.",
+        form: `
+          <form>
+            <input type="text" placeholder="Full name" required />
+            <input type="email" placeholder="Email address" required />
+            <select>
+              <option>Student</option>
+              <option>Creator</option>
+              <option>Builder</option>
+              <option>Educator</option>
+            </select>
+            <button class="btn" type="submit">Join Now</button>
+          </form>
+        `
+      },
+      read: {
+        title: "Read Now",
+        body: "Pick a track and we’ll personalize your feed.",
+        form: `
+          <form>
+            <select>
+              <option>AI + Future</option>
+              <option>Gaming + Culture</option>
+              <option>Startups + Builders</option>
+              <option>Creative Tech</option>
+            </select>
+            <button class="btn" type="submit">Start Reading</button>
+          </form>
+        `
+      },
+      community: {
+        title: "Join Community",
+        body: "Meet creators, find mentors, and build together.",
+        form: `
+          <form>
+            <input type="text" placeholder="Your handle" required />
+            <input type="text" placeholder="City" />
+            <button class="btn" type="submit">Get Invite</button>
+          </form>
+        `
+      },
+      launch: {
+        title: "Submit a Launch",
+        body: "Share your product drop for the Launch Radar.",
+        form: `
+          <form>
+            <input type="text" placeholder="Product name" required />
+            <input type="url" placeholder="Link" required />
+            <textarea rows="3" placeholder="What makes it special?"></textarea>
+            <button class="btn" type="submit">Submit</button>
+          </form>
+        `
+      },
+      builder: {
+        title: "Get Featured",
+        body: "We’re highlighting student builders and youth startups.",
+        form: `
+          <form>
+            <input type="text" placeholder="Founder name" required />
+            <input type="text" placeholder="Startup name" required />
+            <input type="url" placeholder="Website" />
+            <button class="btn" type="submit">Apply</button>
+          </form>
+        `
+      },
+      event: {
+        title: "Events & Challenges",
+        body: "Tell us which event you want to join.",
+        form: `
+          <form>
+            <select>
+              <option>48-hour Build Sprint</option>
+              <option>Creator Challenge: AI Remix</option>
+              <option>Campus Demo Night</option>
+            </select>
+            <input type="email" placeholder="Email" required />
+            <button class="btn" type="submit">Reserve Spot</button>
+          </form>
+        `
+      },
+      subscribe: {
+        title: "Subscribe",
+        body: "Drop your email and get the weekly round-up.",
+        form: `
+          <form>
+            <input type="email" placeholder="Email address" required />
+            <button class="btn" type="submit">Subscribe</button>
+          </form>
+        `
+      }
+    };
+
+    const backdrop = document.querySelector("[data-backdrop]");
+    const contentTarget = document.getElementById("modal-content");
+
+    function openModal(key) {
+      const data = modalContent[key];
+      if (!data) return;
+      contentTarget.innerHTML = `
+        <h3 id="modal-title">${data.title}</h3>
+        <p>${data.body}</p>
+        ${data.form}
+      `;
+      backdrop.style.display = "flex";
+    }
+
+    function closeModal() {
+      backdrop.style.display = "none";
+      contentTarget.innerHTML = "";
+    }
+
+    document.querySelectorAll("[data-modal]").forEach(btn => {
+      btn.addEventListener("click", () => openModal(btn.dataset.modal));
+    });
+
+    backdrop.addEventListener("click", (e) => {
+      if (e.target === backdrop || e.target.hasAttribute("data-close")) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // Live Tech Wire
+    const feeds = [
+      "https://techcrunch.com/feed/",
+      "https://www.wired.com/feed/rss",
+      "https://hnrss.org/frontpage",
+      "https://www.theverge.com/rss/index.xml"
+    ];
+
+    const rssProxy = (url) => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+
+    async function fetchFeed(url) {
+      const res = await fetch(rssProxy(url));
+      if (!res.ok) throw new Error("Feed error");
+      const data = await res.json();
+      return (data.items || []).slice(0, 6).map(item => ({
+        title: item.title,
+        link: item.link,
+        pubDate: item.pubDate,
+        source: data.feed?.title || "Source"
+      }));
+    }
+
+    async function loadLiveWire() {
+      const wire = document.getElementById("live-wire");
+      try {
+        const results = await Promise.allSettled(feeds.map(fetchFeed));
+        const items = results.flatMap(r => (r.status === "fulfilled" ? r.value : []));
+        items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+        const top = items.slice(0, 12);
+        wire.innerHTML = top.map(item => `
+          <div class="wire-item">
+            <div class="pill">Live</div>
+            <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+            <span class="wire-source">${item.source} · ${new Date(item.pubDate).toLocaleString()}</span>
+          </div>
+        `).join("") || `
+          <div class="wire-item">
+            <div class="pill">Offline</div>
+            <a href="#">Couldn’t load live stories right now.</a>
+            <span class="wire-source">Try again in a minute.</span>
+          </div>
+        `;
+      } catch (err) {
+        wire.innerHTML = `
+          <div class="wire-item">
+            <div class="pill">Offline</div>
+            <a href="#">Couldn’t load live stories right now.</a>
+            <span class="wire-source">Try again in a minute.</span>
+          </div>
+        `;
+      }
+    }
+
+    loadLiveWire();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
